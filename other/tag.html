@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>JavaScript Tables</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="" />
+ </head>
+ <body>
+  <style>
+   table {
+    border-collapse: collapse;
+    width: 75%;
+   }
+
+   th,
+   td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+   }
+  </style>
+  <script>
+   // Create table element
+   const table = document.createElement("table");
+
+   // Create thead element
+   const thead = document.createElement("thead");
+   table.appendChild(thead);
+
+   // Create header row
+   const headerRow = document.createElement("tr");
+   thead.appendChild(headerRow);
+
+   // Create header cells and add content
+   const carHeader = document.createElement("td");
+   carHeader.textContent = "Car";
+   headerRow.appendChild(carHeader);
+
+   const topSpeedHeader = document.createElement("td");
+   topSpeedHeader.textContent = "Top Speed";
+   headerRow.appendChild(topSpeedHeader);
+
+   const priceHeader = document.createElement("td");
+   priceHeader.textContent = "Price";
+   headerRow.appendChild(priceHeader);
+
+   // Create tbody element
+   const tbody = document.createElement("tbody");
+   table.appendChild(tbody);
+
+   // Create first row
+   const row1 = document.createElement("tr");
+   tbody.appendChild(row1);
+
+   // Create first row cells and add content
+   const car1 = document.createElement("td");
+   car1.textContent = "Chevrolet";
+   row1.appendChild(car1);
+
+   const topSpeed1 = document.createElement("td");
+   topSpeed1.textContent = "120mph";
+   row1.appendChild(topSpeed1);
+
+   const price1 = document.createElement("td");
+   price1.textContent = "$10,000";
+   row1.appendChild(price1);
+
+   // Create second row
+   const row2 = document.createElement("tr");
+   tbody.appendChild(row2);
+
+   // Create second row cells and add content
+   const car2 = document.createElement("td");
+   car2.textContent = "Pontiac";
+   row2.appendChild(car2);
+
+   const topSpeed2 = document.createElement("td");
+   topSpeed2.textContent = "140mph";
+   row2.appendChild(topSpeed2);
+
+   const price2 = document.createElement("td");
+   price2.textContent = "$20,000";
+   row2.appendChild(price2);
+
+   // Append the table to the body
+   document.body.appendChild(table);
+  </script>
+ </body>
+</html>

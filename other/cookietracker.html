@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>Page Visit Counter</title>
+  <style>
+   /* Styling for the clear cookies button */
+   .clear-cookies-btn {
+    font-size: 28px; /* Larger font size */
+    padding: 12px 24px; /* Padding around the text */
+    background-color: #e65247; /* Red background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    text-align: center; /* Center align the text */
+    font-family: ariel;
+    display: inline-block;
+    margin: 4px 2px; /* Margins around the button */
+    border-radius: 8px; /* Rounded corners */
+    position: absolute;
+    margin-left: 50px;
+    margin-top: 35px;
+    left: 0;
+    top: 0;
+   }
+
+   /* Change the background color on hover */
+   .clear-cookies-btn:hover {
+    background-color: #d32f2f;
+    cursor: pointer; /* Cursor changes to pointer on hover */
+   }
+  </style>
+  <script type="text/javascript">
+   // Function to set a cookie with a given name, value, and expiry days
+   function setCookie(cookieName, cookieValue, expireMinutes) {
+    let date = new Date();
+    date.setTime(date.getTime() + expireMinutes * 60 * 1000);
+    let expires = "expires=" + date.toUTCString();
+    document.cookie =
+     cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+   }
+
+   // Function to get the value of a cookie with a given name
+   // 1. Check if a cookie with the given name exists in setCookieIfNotExists()
+   // 2. Retrieve the current value of the "pageVisitCounter" cookie in incrementPageVisitCounter()
+   function getCookie(cookieName) {
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookies = decodedCookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+     let cookie = cookies[i].trim();
+     if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+     }
+    }
+    return "";
+   }
+
+   // Function to set a cookie if it does not exist
+   function setCookieIfNotExists(cookieName, cookieValue, expireDays) {
+    if (getCookie(cookieName) === "") {
+     setCookie(cookieName, cookieValue, expireDays);
+    }
+   }
+
+   // Function to increment the page visit counter and display an alert
+   function incrementPageVisitCounter() {
+    let counter = parseInt(getCookie("pageVisitCounter"));
+    counter++;
+    setCookie("pageVisitCounter", counter, 30);
+    alert(
+     "This page has been visited " + counter + " times in the last month."
+    );
+   }
+
+   // Function to clear the "pageVisitCounter" cookie
+   function clearCookies() {
+    setCookie("pageVisitCounter", "", -1);
+    alert("The cookie count has been cleared.");
+   }
+
+   // Function to set up the page visit counter and increment it
+   function window_onload() {
+    setCookieIfNotExists("pageVisitCounter", 0, 30);
+    incrementPageVisitCounter();
+   }
+  </script>
+ </head>
+ <body onload="window_onload()">
+  <button class="clear-cookies-btn" onclick="clearCookies()">
+   Clear Cookies
+  </button>
+ </body>
+</html>

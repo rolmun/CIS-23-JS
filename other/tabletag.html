@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Car Performance / Dollar</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+   body {
+    font-family: Arial, sans-serif;
+   }
+   .table-container {
+    display: flex;
+    justify-content: left;
+    margin-left: 70px;
+    margin-top: 25px;
+   }
+   table {
+    border-collapse: collapse;
+    width: auto;
+   }
+   th,
+   td {
+    text-align: left;
+    padding: 50px;
+    border: 1px solid #ccc;
+   }
+   th {
+    background-color: #f2f2f2;
+   }
+   #carForm {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+   }
+   #carForm input {
+    width: auto;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 20px;
+   }
+   #carForm input:hover {
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    border: 1px solid #181818;
+   }
+   #carForm input:active {
+    cursor: pointer;
+   }
+   #carForm button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 7.5px 16px;
+    text-align: top;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 10px;
+   }
+   #carForm button:hover {
+    color: rgb(105, 105, 105);
+    border: 1px solid #6e6e6e;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+   }
+   s #carForm button:active {
+    opacity: 80%;
+   }
+  </style>
+ </head>
+ <body>
+  <!-- Form to let the user input car, top speed, and price -->
+  <form id="carForm">
+   <input type="text" id="car" placeholder="Enter a car" required />
+   <input
+    type="text"
+    id="topSpeed"
+    placeholder=" Enter Top Speed (mpg)"
+    required
+   />
+   <input type="text" id="price" placeholder="Enter price ($)" required />
+   <button type="submit">Add Car</button>
+  </form>
+
+  <!-- Container div to center the table -->
+  <div class="table-container">
+   <!-- Empty table with an ID for JavaScript to update -->
+   <table id="myTable"></table>
+  </div>
+  <script>
+   // Helper function to create a table cell (td or th) with the given content
+   function createCell(content, isHeader = false) {
+    const cell = document.createElement(isHeader ? "th" : "td");
+    cell.textContent = content;
+    return cell;
+   }
+
+   // Helper function to create a table row (tr) with the given cells
+   function createRow(cells, isHeader = false) {
+    const row = document.createElement("tr");
+    cells.forEach((cell) => {
+     row.appendChild(createCell(cell, isHeader));
+    });
+    return row;
+   }
+
+   // Select the table element by its ID
+   const table = document.getElementById("myTable");
+
+   // Create thead element and header row using DOM objects
+   const thead = document.createElement("thead");
+   thead.appendChild(createRow(["Car", "Top Speed", "Price"], true));
+   table.appendChild(thead);
+
+   // Create tbody element and data rows using DOM objects
+   const tbody = document.createElement("tbody");
+   tbody.appendChild(createRow(["Chevrolet", "120mph", "$10,000"]));
+   tbody.appendChild(createRow(["Pontiac", "140mph", "$20,000"]));
+   table.appendChild(tbody);
+
+   // Listen for the form's submit event
+   const form = document.getElementById("carForm");
+   form.addEventListener("submit", (event) => {
+    // Prevent the form from submitting and refreshing the page
+    event.preventDefault();
+
+    // Get the user's input from the form fields
+    const car = document.getElementById("car").value;
+    const topSpeed = document.getElementById("topSpeed").value;
+    const price = document.getElementById("price").value;
+
+    // Add the user's input as a new row in the table
+    tbody.appendChild(createRow([car, topSpeed, price]));
+
+    // Clear the form fields
+    form.reset();
+   });
+  </script>
+ </body>
+</html>
